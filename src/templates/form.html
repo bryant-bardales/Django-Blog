@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="text-align: center; padding-bottom: 30px; padding-top: 30px;">Add a Blog Post</h1>
+
+
+<form method="POST" action="." enctype="multipart/form-data"  style="text-align: center;"> {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+{% endblock %}
