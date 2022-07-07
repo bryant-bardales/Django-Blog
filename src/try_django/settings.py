@@ -43,6 +43,8 @@ INSTALLED_APPS = [  # components
     'searches',
 
     'contactrequests',
+
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,6 @@ MEDIA_URL = '/media/'  # django-storages
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = "sent_emails"
