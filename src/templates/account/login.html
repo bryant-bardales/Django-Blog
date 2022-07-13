@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% load static %}
+
+<div class="container mx-5">
+
+  <h1 style="font-weight: bold; text-align:center; padding-top:20px;">Sign In</h1>
+
+  <div class=" signin text-center">
+
+    <a href="{% provider_login_url 'google' %}" class="text-dark"><img src="{% static 'images/btn_google_signin_light_normal_web@2x.png' %}" style="width:11rem; height:auto; padding-top:30px;"></a>
+    <a href="{% provider_login_url 'facebook' %}" class="text-dark"><img src="{% static 'facebook.png' %}" style="width:14rem; height:auto; padding-top:30px;"></a>
+  </div>
+
+  <br><br>
+
+  <div style="width: 100%; height: 15px; border-bottom: 1px solid lightgray; text-align: center">
+    <span class="text-muted" style="margin-top:-15% !important; font-size: 11px; background-color: white; padding: 0px 10px;">
+      OR
+    </span>
+  </div>
+
+  <br><br>
+
+  <form method="POST" style="text-align:center;">
+    {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success">Sign In</button>
+
+  </form>
+
+  <p style="margin-bottom:2px; text-align:center; padding-top: 20px;">No Account?</p>
+  <form action="/accounts/signup/" style="text-align:center;">
+    <button class="btn btn-primary">Create Account</button>
+  </form>
+  
+  <p style="margin-top:5px; margin-bottom:2px; text-align:center; padding-top: 20px;">Forgot Password?</p>
+  <form action="/accounts/password/reset/" style="text-align:center;">
+    <button class="btn btn-danger">Reset Password</button>
+  </form>
+
+
+</div>
+
+{% endblock %}

@@ -36,9 +36,9 @@ urlpatterns = [
     path('about/', about_view),
     path('contact/', contact_view.contact_view),
     path('search/', search_view),
-    path("accounts/", include("django.contrib.auth.urls")),
+    # path("accounts/", include("django.contrib.auth.urls")),
     path('admin/', admin.site.urls),
-    path("accounts/", include("accounts.urls")),  # new
+    path("accounts/", include("allauth.urls")),  # new
    
 ]
 

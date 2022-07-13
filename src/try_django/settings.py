@@ -45,6 +45,18 @@ INSTALLED_APPS = [  # components
     'contactrequests',
 
     'accounts',
+
+    'django.contrib.sites', # new
+
+    # 'uni_form',
+
+    'crispy_forms', # for crispy forms
+
+    'allauth', # new
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'allauth.socialaccount.providers.google', # for google auth
+    'allauth.socialaccount.providers.facebook', # for facebook auth
 ]
 
 MIDDLEWARE = [
@@ -59,10 +71,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'try_django.urls'
 
+CRISPY_TEMPLATE_PACK = 'uni_form' # Crispy forms default template
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +148,7 @@ LOCAL_STATIC_CDN_PATH = os.path.join(
     os.path.dirname(BASE_DIR), 'static_cdn_test')
 
 STATIC_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH, 'static')  # live cdn AWS S3
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ]
@@ -143,3 +161,38 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "sent_emails"
+
+AUTHENTICATION_BACKENDS = (
+ #used for default signin such as loggin into admin panel
+ 'django.contrib.auth.backends.ModelBackend', 
+  
+ #used for social authentications
+ 'allauth.account.auth_backends.AuthenticationBackend',
+ )
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': [
+            'email'
+        ],
+        'AUTH_PARAMS': {
+            'auth_type': 'reauthenticate'
+        },
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERSION': 'v2.4'
+        
+    },
+
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

@@ -35,9 +35,7 @@
 
         <form action="/accounts/logout/">
           {% if request.user.is_authenticated %}
-            {% if request.user.is_staff %}
               <button class="btn btn-outline-danger" style="padding-left: -5px; padding-right: -5px;" type="submit">Logout</button>
-            {% endif %}
           {% endif %}
         </form>
 
