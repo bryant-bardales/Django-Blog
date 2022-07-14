@@ -48,7 +48,7 @@ INSTALLED_APPS = [  # components
 
     'django.contrib.sites', # new
 
-    # 'uni_form',
+    'uni_form',
 
     'crispy_forms', # for crispy forms
 
